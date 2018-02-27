@@ -23,6 +23,10 @@
  * International Registered Trademark & Property of PrestaShop SA
  *}
 <div id="js-product-list">
+    {block name='pagination_top'}
+        {include file='_partials/pagination.tpl' pagination=$listing.pagination}
+    {/block}
+
   <div class="products row">
     {foreach from=$listing.products item="product"}
       {block name='product_miniature'}
