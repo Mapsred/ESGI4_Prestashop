@@ -35,3 +35,5 @@ download/
 /img/*
 upload/
 
+app/cache/*
+app/logs/*
