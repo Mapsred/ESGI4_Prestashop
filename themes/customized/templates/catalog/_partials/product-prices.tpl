@@ -35,11 +35,8 @@
 
     {block name='product_price'}
       <div
-        class="product-price h5 {if $product.has_discount}has-discount{/if}"
-        itemprop="offers"
-        itemscope
-        itemtype="https://schema.org/Offer"
-      >
+        class="product-price h5 {if $product.has_discount}has-discount{/if}" itemprop="offers" itemscope
+        itemtype="https://schema.org/Offer">
         <link itemprop="availability" href="https://schema.org/InStock"/>
         <meta itemprop="priceCurrency" content="{$currency.iso_code}">
 
@@ -90,11 +87,13 @@
     {hook h='displayProductPriceBlock' product=$product type="weight" hook_origin='product_sheet'}
 
     <div class="tax-shipping-delivery-label">
-      {if $configuration.display_taxes_label}
-        {$product.labels.tax_long}
-      {/if}
-      {hook h='displayProductPriceBlock' product=$product type="price"}
-      {hook h='displayProductPriceBlock' product=$product type="after_price"}
+        <h5>
+            {if $configuration.display_taxes_label}
+                {$product.labels.tax_long}
+            {/if}
+            {hook h='displayProductPriceBlock' product=$product type="price"}
+            {hook h='displayProductPriceBlock' product=$product type="after_price"}
+        </h5>
     </div>
   </div>
 {/if}

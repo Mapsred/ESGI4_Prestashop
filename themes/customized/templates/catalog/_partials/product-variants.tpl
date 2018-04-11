@@ -22,13 +22,13 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-<div class="product-variants">
+<div class="product-attributes product-variants">
   {foreach from=$groups key=id_attribute_group item=group}
-    <div class="clearfix product-variants-item">
+    <div class="clearfix product-variants-item {if $group.group_type == 'color'}color-group{/if}">
       <span class="control-label">{$group.name}</span>
       {if $group.group_type == 'select'}
         <select
-          class="form-control form-control-select"
+          class="form-control form-control-select mb-2 mr-sm-2"
           id="group_{$id_attribute_group}"
           data-product-attribute="{$id_attribute_group}"
           name="group[{$id_attribute_group}]">
@@ -64,4 +64,8 @@
       {/if}
     </div>
   {/foreach}
+{block name='product_quantity'}
+    {include file='catalog/_partials/product-quantity.tpl'}
+{/block}
+
 </div>

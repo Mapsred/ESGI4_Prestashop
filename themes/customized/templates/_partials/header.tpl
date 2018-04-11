@@ -30,7 +30,7 @@
 
 {block name='header_nav'}
   <nav class="header-nav">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
           <div class="hidden-sm-down">
             <div class="col-md-4 col-xs-12">
@@ -56,7 +56,7 @@
 
 {block name='header_top'}
   <div class="header-top">
-    <div class="container">
+    <div class="container-fluid">
        <div class="row">
         <div class="col-md-2 hidden-sm-down" id="_desktop_logo">
           <a href="{$urls.base_url}">

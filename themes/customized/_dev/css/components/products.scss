@@ -142,7 +142,8 @@
 
   .tax-shipping-delivery-label {
     font-size: 0.8125rem;
-    color: $gray;
+    color: $brand-primary;
+    display: inline-block;
   }
 }
 .product-discount {
@@ -206,7 +207,7 @@
   margin-bottom: $medium-space;
   position: relative;
   img {
-    @include box-shadow;
+    //@include box-shadow;
     background: white;
   }
   .layer {
@@ -359,7 +360,7 @@
   > li.thumb-container {
     display: inline;
     > .thumb {
-      @include box-shadow;
+      //@include box-shadow;
       cursor: pointer;
       margin-bottom: $small-space;
       .images-container & {
