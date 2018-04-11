@@ -43,3 +43,11 @@ services:
       environment:
         MYSQL_USERNAME: root
         MYSQL_ROOT_PASSWORD: root
+
+    nodejs:
+      build: engine/nodejs
+      container_name: prestashop-nodejs
+      working_dir: /application
+      volumes:
+        - .:/application
+      tty: true
