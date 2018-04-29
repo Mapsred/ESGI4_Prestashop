@@ -6,7 +6,7 @@
   }
 }
 .product-price {
-  color: $brand-primary;
+  color: $gray-darker;
   display: inline-block;
 }
 #product-description-short {
@@ -66,12 +66,14 @@
     width: 100%;
   }
   .add-to-cart {
-    height: 2.75rem;
     line-height: inherit;
     padding-top: 0.625rem;
     .material-icons {
       line-height: inherit;
     }
+  }
+  .product-right {
+    float: right;
   }
 }
 .product-quantity {
@@ -135,16 +137,24 @@
 }
 .product-prices {
   margin-top: $medium-space;
+  float: right;
 
   div {
     margin-bottom: 0.625rem;
+    span {
+      font-size: $font-size-h3;
+    }
   }
 
   .tax-shipping-delivery-label {
-    font-size: 0.8125rem;
-    color: $brand-primary;
+    font-size: $font-size-h3;
+    color: $gray-darker;
     display: inline-block;
   }
+}
+
+.product-add-to-cart {
+  margin-top: 50px;
 }
 .product-discount {
   color: $gray;
@@ -156,7 +166,7 @@
 }
 .has-discount {
   &.product-price, p {
-    color: $brand-secondary;
+    color: $gray-darker;
   }
   .discount {
     background: $brand-secondary;
@@ -174,7 +184,6 @@
   margin-bottom: 0;
 }
 .tabs {
-  @include box-shadow;
   margin-top: 2rem;
   background: white;
   padding: $medium-space $large-space;
@@ -189,12 +198,12 @@
       border: 0 solid transparent;
       &.active {
         border: none;
-        border-bottom: $brand-primary 3px solid;
-        color: $brand-primary;
+        border-bottom: $gray-darker 3px solid;
+        color: $gray-darker;
       }
       &:hover {
         border: none;
-        border-bottom: $brand-primary 3px solid;
+        border-bottom: $gray-darker 3px solid;
       }
     }
     .nav-item {
@@ -455,7 +464,7 @@
 }
 .product-variants {
   > .product-variants-item {
-    margin: $medium-space 0;
+    margin: $large-space 20px 0 0;
     select {
       background-color: white;
       width: auto;
@@ -596,11 +605,13 @@ li.product-flag {
   display: flex;
   align-items: center;
   margin-top: 1.5rem;
+  border-top: #000000 3px solid;
+  padding-top: 20px;
   ul {
     margin-bottom: 0;
   }
   li {
-    @include box-shadow-light;
+    //@include box-shadow-light;
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
@@ -623,6 +634,10 @@ li.product-flag {
         color: transparent;
       }
     }
+  }
+
+  li:first-child {
+    margin-left: 0;
   }
 }
 .products-selection {

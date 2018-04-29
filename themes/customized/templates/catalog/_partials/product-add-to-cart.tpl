@@ -26,7 +26,7 @@
   {if !$configuration.is_catalog}
     <div class="product-quantity clearfix">
       <div class="add">
-        <button class="btn btn-primary add-to-cart" data-button-action="add-to-cart" type="submit"
+        <button class="btn btn-dark btn-sm btn-flat add-to-cart" data-button-action="add-to-cart" type="submit"
                 {if !$product.add_to_cart_url}disabled{/if}>
           <i class="material-icons shopping-cart">&#xE547;</i>
           {l s='Add to cart' d='Shop.Theme.Actions'}

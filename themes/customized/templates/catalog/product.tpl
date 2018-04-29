@@ -131,15 +131,14 @@
                                 {block name='product_discounts'}
                                     {include file='catalog/_partials/product-discounts.tpl'}
                                 {/block}
-
-                                <div class="product-prices">
+                                <div class="product-right">
                                     {block name='product_prices'}
                                         {include file='catalog/_partials/product-prices.tpl'}
                                     {/block}
-
                                     {block name='product_add_to_cart'}
                                         {include file='catalog/_partials/product-add-to-cart.tpl'}
                                     {/block}
+
                                 </div>
 
                                 {block name='product_additional_info'}

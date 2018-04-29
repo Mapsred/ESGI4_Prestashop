@@ -369,7 +369,7 @@
 .product-attributes {
   display: flex;
   border-top: #000000 3px solid;
-  border-bottom: #000000 1px solid;
+  border-bottom: #000000 3px solid;
   margin-top: 15px;
 }
 
@@ -386,7 +386,7 @@
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: center;
+  //align-items: center;
   align-content: center;
 
 }
@@ -408,4 +408,17 @@
   color: #fff;
   background-color: #343a40;
   border-color: #343a40;
+}
+
+.btn.btn-flat {
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-width: 1px;
+    padding: 6px 12px;
+
+    .material-icons {
+      font-size: 20px;
+    }
 }
