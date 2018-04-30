@@ -2214,7 +2214,7 @@ CREATE TABLE `ps_employee` (
   KEY `employee_login` (`email`,`passwd`),
   KEY `id_employee_passwd` (`id_employee`,`passwd`),
   KEY `id_profile` (`id_profile`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2223,7 +2223,7 @@ CREATE TABLE `ps_employee` (
 
 LOCK TABLES `ps_employee` WRITE;
 /*!40000 ALTER TABLE `ps_employee` DISABLE KEYS */;
-INSERT INTO `ps_employee` VALUES (1,1,1,'Mathieu','François','maps_red@yahoo.fr','$2y$10$DRsbkHnwEpUsZ3Nl3fN78OsOtGTVkpBMIqRXM6rmIpPZKhXZoOTLS','2018-02-27 09:33:09','2018-01-27','2018-02-27','0000-00-00','0000-00-00',1,NULL,NULL,'default','admin-theme.css',1,0,1,1,1,5,0,1,NULL,NULL,'0000-00-00 00:00:00');
+INSERT INTO `ps_employee` VALUES (1,1,1,'Mathieu','François','maps_red@yahoo.fr','$2y$10$DRsbkHnwEpUsZ3Nl3fN78OsOtGTVkpBMIqRXM6rmIpPZKhXZoOTLS','2018-02-27 09:33:09','2018-01-27','2018-02-27','0000-00-00','0000-00-00',1,NULL,NULL,'default','admin-theme.css',1,0,1,1,1,5,0,1,NULL,NULL,'0000-00-00 00:00:00'),(2,1,1,'Min','admin','admin@prestashop.com','$2y$10$XCIC.y.Nw7QxEVR1H3C/9.HCkwQsAMoT.cU2UJ/7zwhde2wPyjQPC','2018-04-30 09:41:52','2018-03-30','2018-04-30','0000-00-00','0000-00-00',1,NULL,NULL,NULL,'admin-theme.css',1,0,1,1,0,5,0,1,NULL,NULL,'0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `ps_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2248,7 +2248,7 @@ CREATE TABLE `ps_employee_shop` (
 
 LOCK TABLES `ps_employee_shop` WRITE;
 /*!40000 ALTER TABLE `ps_employee_shop` DISABLE KEYS */;
-INSERT INTO `ps_employee_shop` VALUES (1,1);
+INSERT INTO `ps_employee_shop` VALUES (1,1),(2,1);
 /*!40000 ALTER TABLE `ps_employee_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3467,7 +3467,7 @@ CREATE TABLE `ps_log` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3476,7 +3476,7 @@ CREATE TABLE `ps_log` (
 
 LOCK TABLES `ps_log` WRITE;
 /*!40000 ALTER TABLE `ps_log` DISABLE KEYS */;
-INSERT INTO `ps_log` VALUES (1,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 15:35:50','2018-02-27 15:35:50'),(2,1,0,'Product catalog filters stored.','',0,1,'2018-02-27 15:39:23','2018-02-27 15:39:23'),(3,1,0,'Product modification','Product',8,1,'2018-02-27 15:50:41','2018-02-27 15:50:41'),(4,1,0,'Product modification','Product',8,1,'2018-02-27 15:50:46','2018-02-27 15:50:46'),(5,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 17:41:29','2018-02-27 17:41:29'),(6,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 17:57:04','2018-02-27 17:57:04'),(7,1,0,'Connexion au back-office depuis 172.21.0.1','',0,1,'2018-04-29 22:36:18','2018-04-29 22:36:18');
+INSERT INTO `ps_log` VALUES (1,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 15:35:50','2018-02-27 15:35:50'),(2,1,0,'Product catalog filters stored.','',0,1,'2018-02-27 15:39:23','2018-02-27 15:39:23'),(3,1,0,'Product modification','Product',8,1,'2018-02-27 15:50:41','2018-02-27 15:50:41'),(4,1,0,'Product modification','Product',8,1,'2018-02-27 15:50:46','2018-02-27 15:50:46'),(5,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 17:41:29','2018-02-27 17:41:29'),(6,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-02-27 17:57:04','2018-02-27 17:57:04'),(7,1,0,'Connexion au back-office depuis 172.21.0.1','',0,1,'2018-04-29 22:36:18','2018-04-29 22:36:18'),(8,1,0,'Connexion au back-office depuis 172.22.0.1','',0,1,'2018-04-30 15:39:47','2018-04-30 15:39:47'),(9,1,0,'Création : Employee','Employee',2,1,'2018-04-30 15:41:52','2018-04-30 15:41:52');
 /*!40000 ALTER TABLE `ps_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7397,4 +7397,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-29 23:21:26
+-- Dump completed on 2018-04-30 15:43:58
