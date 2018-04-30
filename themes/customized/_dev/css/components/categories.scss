@@ -146,7 +146,6 @@
 #search_filters,
 #search_filters_brands,
 #search_filters_suppliers {
-  @include box-shadow;
   margin-bottom: 1.563rem;
   background: white;
   padding: 1.563rem 1.25rem;
@@ -245,10 +244,9 @@
   }
 }
 .block-categories {
-  @include box-shadow;
   background: white;
   padding: 1.563rem 1.25rem;
-  margin-bottom: 1.563rem;
+  margin-bottom: 1.5rem;
   .category-sub-menu {
     margin-top: $small-space;
     .category-sub-link{

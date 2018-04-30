@@ -36,6 +36,7 @@ upload/
 app/cache/*
 app/logs/*
 
+img/tmp/*
 
 node_modules
 vendor

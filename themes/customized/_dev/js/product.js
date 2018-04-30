@@ -30,6 +30,24 @@ $(document).ready(function () {
   coverImage();
   imageScrollBox();
 
+  function showLoad() {
+      $('.product-cover .layer').css('transition', 'all 0.4s');
+      $('.product-cover .layer').css('opacity', 1);
+      $('.product-cover').css('pointer-events', 'none');
+      $('.product-cover .zoom-in').html('sync');
+      $('.thumb-container').css('transition', 'all 0.4s');
+      $('.thumb-container').css('opacity', 0.7);
+  }
+
+  // function hideLoad() {
+  //   $('.product-cover .layer').css('opacity', '');
+  //   $('.product-cover').css('pointer-events', '');
+  // }
+
+  prestashop.on('updateProduct', function (event) {
+      showLoad();
+  });
+
   prestashop.on('updatedProduct', function (event) {
     createInputFile();
     coverImage();

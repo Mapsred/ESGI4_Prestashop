@@ -124,7 +124,7 @@
     }
   }
   .header-top {
-    > .container {
+    > .container, .container-fluid {
       position: relative;
     }
     padding-bottom: 1.25rem;
@@ -168,6 +168,7 @@
   }
   .breadcrumb {
     background: transparent;
+    margin-bottom: 30px;
     padding: 0;
     &[data-depth="1"] {
       display: none;
@@ -400,8 +401,15 @@
 }
 
 .color {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
+}
+
+#add-to-cart-or-refresh {
+  .color {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .btn-dark {
@@ -421,4 +429,9 @@
     .material-icons {
       font-size: 20px;
     }
+}
+
+#left-column {
+  background-color: #F2F2F2;
+  padding: 15px;
 }
