@@ -23,6 +23,11 @@ SQL Query :
 UPDATE `ps_shop_url` SET `domain` = 'localhost', `domain_ssl` = 'localhost' WHERE `id_shop_url` = 1;
 ````
 
+To update the page title : 
+````sql
+UPDATE `ps_configuration` SET `value` = 'MyPageTitle' WHERE `id_configuration` = 231
+````
+
 ### Admin 
 ``/dashboard``
 
