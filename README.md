@@ -26,5 +26,5 @@ UPDATE `ps_shop_url` SET `domain` = 'localhost', `domain_ssl` = 'localhost' WHER
 ### Admin 
 ``/dashboard``
 
-Email: admin@prestashop.fr
+Email: admin@prestashop.com
 Password: password
