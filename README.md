@@ -25,7 +25,8 @@ UPDATE `ps_shop_url` SET `domain` = 'localhost', `domain_ssl` = 'localhost' WHER
 
 To update the page title : 
 ````sql
-UPDATE `ps_configuration` SET `value` = 'MyPageTitle' WHERE `id_configuration` = 231
+UPDATE `ps_configuration` SET `value` = 'MyShomeName' WHERE `name` = 'PS_SHOP_NAME';
+UPDATE `ps_configuration` SET `value` = 'MyShopEmail' WHERE `name` = 'PS_SHOP_EMAIL';
 ````
 
 ### Admin 
