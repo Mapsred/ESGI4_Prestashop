@@ -4,8 +4,16 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+/**
+ * Class Admiring
+ *
+ * @author François MATHIEU <francois.mathieu@livexp.fr>
+ */
 class Admiring extends Module
 {
+    /** @var string $moduleDir */
+    private $moduleDir;
+
     public function __construct()
     {
         $this->name = 'admiring';
@@ -16,6 +24,40 @@ class Admiring extends Module
         $this->description = 'Avec ce module, vos clients pourront faire quelque chose !';
         $this->bootstrap = true;
         parent::__construct();
+        $this->moduleDir = _PS_MODULE_DIR_ . $this->name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function install()
+    {
+        parent::install();
+        $this->registerHook('displayNotation');
+
+        return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        $this->context->smarty->assign('form', $this->renderForm());
+        $this->processForm();
+
+        return $this->fetch($this->moduleDir . "/views/templates/hook/getContent.tpl");
+    }
+
+    /* Admin HelperForm */
+
+    /**
+     * @return string
+     */
+    public function getAdminUrl()
+    {
+        return $this->context->link->getAdminLink('AdminModules') .
+            '&configure=' . $this->name . '&tab_module=' . $this->tab . '&conf=4&module_name=' . $this->name;
     }
 
     public function processForm()
@@ -24,15 +66,9 @@ class Admiring extends Module
             $enable_comments = Tools::getValue('enable_comments');
             Configuration::updateValue('ADMIRING_COMMENTS', $enable_comments);
             $this->context->smarty->assign('confirmation', 'ok');
+
+            Tools::redirectAdmin($this->getAdminUrl());
         }
-    }
-
-    public function getContent()
-    {
-        $this->context->smarty->assign('form', $this->renderForm());
-        $this->processForm();
-
-        return $this->fetch(_PS_MODULE_DIR_ . "admiring/views/templates/hook/getContent.tpl");
     }
 
     /**
@@ -101,9 +137,7 @@ class Admiring extends Module
         $helper->default_form_language = (int)Configuration::get('PS_LANG_DEFAULT');
         $helper->allow_employee_form_lang = (int)Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG');
         $helper->submit_action = 'submit_admiring_form';
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false) .
-            '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
+        $helper->currentIndex = $this->getAdminUrl();
         $helper->tpl_vars = [
             'fields_value' => [
                 'enable_grades' => Tools::getValue('enable_grades', Configuration::get('ADMIRING_GRADES')),
@@ -114,5 +148,16 @@ class Admiring extends Module
         ];
 
         return $helper->generateForm([$this->getFormFields()]);
+    }
+
+    /* DisplayNotation HelperForm */
+
+    /**
+     * @param $params
+     * @return string
+     */
+    public function hookDisplayNotation($params)
+    {
+        return $this->fetch($this->moduleDir . "/views/templates/hook/displayNotation.tpl");
     }
 }
