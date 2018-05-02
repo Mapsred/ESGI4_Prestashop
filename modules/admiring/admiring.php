@@ -33,7 +33,7 @@ class Admiring extends Module
     public function install()
     {
         parent::install();
-        $this->registerHook('displayNotation');
+        $this->registerHook('displayReassurance');
 
         return true;
     }
@@ -65,6 +65,8 @@ class Admiring extends Module
         if (Tools::isSubmit('submit_admiring_form')) {
             $enable_comments = Tools::getValue('enable_comments');
             Configuration::updateValue('ADMIRING_COMMENTS', $enable_comments);
+            $enable_grades = Tools::getValue('enable_grades');
+            Configuration::updateValue('ADMIRING_GRADES', $enable_grades);
             $this->context->smarty->assign('confirmation', 'ok');
 
             Tools::redirectAdmin($this->getAdminUrl());
@@ -156,8 +158,8 @@ class Admiring extends Module
      * @param $params
      * @return string
      */
-    public function hookDisplayNotation($params)
+    public function hookDisplayReassurance($params)
     {
-        return $this->fetch($this->moduleDir . "/views/templates/hook/displayNotation.tpl");
+        return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
     }
 }

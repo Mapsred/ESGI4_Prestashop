@@ -158,10 +158,6 @@
                         {hook h='displayReassurance'}
                     {/block}
 
-                    {block name='display_notation'}
-                        {hook h='displayNotation'}
-                    {/block}
-
                     {block name='product_tabs'}
                     <div class="tabs">
                         <ul class="nav nav-tabs" role="tablist">
