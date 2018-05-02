@@ -33,6 +33,7 @@ class Admiring extends Module
     public function install()
     {
         parent::install();
+        $this->createTable();
         $this->registerHook('displayReassurance');
 
         return true;
@@ -43,8 +44,8 @@ class Admiring extends Module
      */
     public function getContent()
     {
-        $this->context->smarty->assign('form', $this->renderForm());
-        $this->processForm();
+        $this->context->smarty->assign('form', $this->renderAdminForm());
+        $this->processAdminForm();
 
         return $this->fetch($this->moduleDir . "/views/templates/hook/getContent.tpl");
     }
@@ -60,7 +61,7 @@ class Admiring extends Module
             '&configure=' . $this->name . '&tab_module=' . $this->tab . '&conf=4&module_name=' . $this->name;
     }
 
-    public function processForm()
+    public function processAdminForm()
     {
         if (Tools::isSubmit('submit_admiring_form')) {
             $enable_comments = Tools::getValue('enable_comments');
@@ -76,7 +77,7 @@ class Admiring extends Module
     /**
      * @return array
      */
-    private function getFormFields()
+    private function getAdminFormFields()
     {
         return [
             'form' => [
@@ -132,7 +133,7 @@ class Admiring extends Module
     /**
      * @return string
      */
-    private function renderForm()
+    private function renderAdminForm()
     {
         $helper = new HelperForm();
         $helper->table = 'admiring_comments';
@@ -143,23 +144,56 @@ class Admiring extends Module
         $helper->tpl_vars = [
             'fields_value' => [
                 'enable_grades' => Tools::getValue('enable_grades', Configuration::get('ADMIRING_GRADES')),
-                'enable_comments' => Tools::getValue('enable_comments',
-                    Configuration::get('ADMIRING_COMMENTS')),
+                'enable_comments' => Tools::getValue('enable_comments', Configuration::get('ADMIRING_COMMENTS')),
             ],
             'languages' => $this->context->controller->getLanguages()
         ];
 
-        return $helper->generateForm([$this->getFormFields()]);
+        return $helper->generateForm([$this->getAdminFormFields()]);
     }
 
-    /* DisplayNotation HelperForm */
+    /* DisplayReassurance HelperForm */
+
+    public function processForm()
+    {
+        if (Tools::isSubmit('submit_admiring_comment')) {
+            $admiringComment = new AdmiringComment();
+            $admiringComment->grade = Tools::getValue('admiring_grade');
+            $admiringComment->comment = Tools::getValue('admiring_comment');
+            $admiringComment->id_product = Tools::getValue('id_product');
+
+            $admiringComment->save();
+
+            $this->context->smarty->assign('confirmation', 'ok');
+        }
+    }
 
     /**
-     * @param $params
      * @return string
      */
-    public function hookDisplayReassurance($params)
+    public function hookDisplayReassurance()
     {
+        $this->smarty->assign('module_name', $this->l('Commentaires sur le produit'));
+        $this->smarty->assign('enable_grades', Configuration::get('ADMIRING_GRADES'));
+        $this->smarty->assign('enable_comments', Configuration::get('ADMIRING_COMMENTS'));
+
+        $this->processForm();
+
         return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
+    }
+
+    public function createTable()
+    {
+        $query = "CREATE TABLE IF NOT EXISTS `’’._DB_PREFIX_.’’admiring_comment` (
+    `id_admiring_comment` int(11) NOT NULL AUTO_INCREMENT,
+`id_product` int(11) NOT NULL,
+`grade` tinyint(1) NOT NULL,
+`comment` text NOT NULL,
+`date_add` datetime NOT NULL,
+PRIMARY KEY (`id_admiring_comment`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+
+        Db::getInstance()->execute($query);
+
     }
 }
