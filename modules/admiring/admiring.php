@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpUndefinedClassInspection */
+/** @noinspection PhpUndefinedFieldInspection */
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -35,6 +37,9 @@ class Admiring extends Module
         parent::install();
         $this->createTable();
         $this->registerHook('displayReassurance');
+
+        Configuration::updateValue('ADMIRING_COMMENTS', 1);
+        Configuration::updateValue('ADMIRING_GRADES', 1);
 
         return true;
     }
@@ -182,18 +187,25 @@ class Admiring extends Module
         return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
     }
 
-    public function createTable()
+    protected function createTable()
     {
-        $query = "CREATE TABLE IF NOT EXISTS `’’._DB_PREFIX_.’’admiring_comment` (
+        $requete = "CREATE TABLE IF NOT EXISTS `" . _DB_PREFIX_ . "admiring_comment` (
     `id_admiring_comment` int(11) NOT NULL AUTO_INCREMENT,
-`id_product` int(11) NOT NULL,
-`grade` tinyint(1) NOT NULL,
-`comment` text NOT NULL,
-`date_add` datetime NOT NULL,
-PRIMARY KEY (`id_admiring_comment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+    `id_product` int(11) NOT NULL,
+    `grade` tinyint(1) NOT NULL,
+    `comment` text NOT NULL,
+    `date_add` datetime NOT NULL,
+    PRIMARY KEY (`id_admiring_comment`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+
+        Db::getInstance()->execute($requete);
+    }
+
+    public function dropTable()
+    {
+        $query = "`" . _DB_PREFIX_ . "admiring_comment`";
 
         Db::getInstance()->execute($query);
-
     }
+
 }
