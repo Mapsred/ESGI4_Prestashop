@@ -6,7 +6,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-include_once _PS_MODULE_DIR_.'admiring/classes/AdmiringComment.php';
+include_once _PS_MODULE_DIR_ . 'admiring/classes/AdmiringComment.php';
 
 /**
  * Class Admiring
@@ -190,6 +190,14 @@ class Admiring extends Module
     }
 
     /**
+     * @return array
+     */
+    public function assignFromValues()
+    {
+        return AdmiringComment::findByLimit();
+    }
+
+    /**
      * @return string
      */
     public function hookDisplayReassurance()
@@ -198,14 +206,17 @@ class Admiring extends Module
         $this->smarty->assign('enable_grades', Configuration::get('ADMIRING_GRADES'));
         $this->smarty->assign('enable_comments', Configuration::get('ADMIRING_COMMENTS'));
 
+        //Handle form
         $this->processForm();
+
+        $this->smarty->assign('comments', $this->assignFromValues());
 
         return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
     }
 
     protected function createTable()
     {
-        $requete = "CREATE TABLE IF NOT EXISTS `" . _DB_PREFIX_ . "admiring_comment` (
+        $requete = "CREATE TABLE IF NOT EXISTS `" . _DB_PREFIX_ . AdmiringComment::TABLE . "` (
     `id_admiring_comment` int(11) NOT NULL AUTO_INCREMENT,
     `id_product` int(11) NOT NULL,
     `grade` tinyint(1) NOT NULL,
@@ -219,7 +230,7 @@ class Admiring extends Module
 
     public function dropTable()
     {
-        $query = "`" . _DB_PREFIX_ . "admiring_comment`";
+        $query = "`" . _DB_PREFIX_ . AdmiringComment::TABLE . "`";
 
         Db::getInstance()->execute($query);
     }

@@ -2,8 +2,14 @@
     <div id="block-comments">
         <h3 class="page-product-heading">{$module_name}</h3>
         <div class="tabs">
-            <p>{*Comment*}</p>
-            <p>{*Comment*}</p>
+            {foreach from=$comments item=comment}
+                <p>
+                    <strong>Commentaire #{$comment->id_admiring_comment}</strong> : {$comment->comment}
+                </p>
+                <p>
+                    <strong>Note</strong> {$comment->grade}/5
+                </p>
+            {/foreach}
 
             <form method="post">
                 <div class="form-group">
