@@ -33,10 +33,13 @@ dashboard/import/
 download/
 upload/
 
-app/cache/*
-app/logs/*
+/app/cache/*
+!/app/cache/.gitkeep
+/app/logs/*
+!/app/logs/.gitkeep
 
 img/tmp/*
 
 node_modules
 vendor
+/app/config/database.php
