@@ -31,6 +31,8 @@ class Admiring extends Module
         $this->moduleDir = _PS_MODULE_DIR_ . $this->name;
     }
 
+    /* Module Configuration */
+
     /**
      * @return bool
      */
@@ -39,6 +41,7 @@ class Admiring extends Module
         parent::install();
         $this->createTable();
         $this->registerHook('displayReassurance');
+        $this->registerHook('actionFrontControllerSetMedia');
 
         Configuration::updateValue('ADMIRING_COMMENTS', 1);
         Configuration::updateValue('ADMIRING_GRADES', 1);
@@ -58,6 +61,27 @@ class Admiring extends Module
         Configuration::deleteByName('ADMIRING_GRADES');
 
         return true;
+    }
+
+    protected function createTable()
+    {
+        $requete = "CREATE TABLE IF NOT EXISTS `" . _DB_PREFIX_ . AdmiringComment::TABLE . "` (
+    `id_admiring_comment` int(11) NOT NULL AUTO_INCREMENT,
+    `id_product` int(11) NOT NULL,
+    `grade` tinyint(1) NOT NULL,
+    `comment` text NOT NULL,
+    `date_add` datetime NOT NULL,
+    PRIMARY KEY (`id_admiring_comment`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+
+        Db::getInstance()->execute($requete);
+    }
+
+    public function dropTable()
+    {
+        $query = "DROP TABLE IF EXISTS `" . _DB_PREFIX_ . AdmiringComment::TABLE . "`";
+
+        Db::getInstance()->execute($query);
     }
 
     /**
@@ -197,6 +221,8 @@ class Admiring extends Module
         return AdmiringComment::findByLimit();
     }
 
+    /* Hooks */
+
     /**
      * @return string
      */
@@ -214,25 +240,20 @@ class Admiring extends Module
         return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
     }
 
-    protected function createTable()
+    /**
+     * @param $params
+     */
+    public function hookActionFrontControllerSetMedia($params)
     {
-        $requete = "CREATE TABLE IF NOT EXISTS `" . _DB_PREFIX_ . AdmiringComment::TABLE . "` (
-    `id_admiring_comment` int(11) NOT NULL AUTO_INCREMENT,
-    `id_product` int(11) NOT NULL,
-    `grade` tinyint(1) NOT NULL,
-    `comment` text NOT NULL,
-    `date_add` datetime NOT NULL,
-    PRIMARY KEY (`id_admiring_comment`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
-
-        Db::getInstance()->execute($requete);
+        $this->context->controller->registerStylesheet(
+            'modules-admiring',
+            'modules/' . $this->name . '/views/css/admiring.css',
+            ['media' => 'all', 'priority' => 150]
+        );
+        $this->context->controller->registerJavascript(
+            'modules-admiring',
+            'modules/' . $this->name . '/views/js/admiring.js',
+            ['priority' => 200, 'attribute' => 'async']
+        );
     }
-
-    public function dropTable()
-    {
-        $query = "`" . _DB_PREFIX_ . AdmiringComment::TABLE . "`";
-
-        Db::getInstance()->execute($query);
-    }
-
 }

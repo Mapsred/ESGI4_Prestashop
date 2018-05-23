@@ -1,5 +1,5 @@
 {if $enable_grades or $enable_comments}
-    <div id="block-comments">
+    <div id="block-comments" data-data-scroll="true">
         <h3 class="page-product-heading">{$module_name}</h3>
         <div class="tabs">
             {foreach from=$comments item=comment}
