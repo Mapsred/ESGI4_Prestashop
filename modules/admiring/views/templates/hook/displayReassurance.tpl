@@ -4,18 +4,18 @@
         <div class="tabs">
             {foreach from=$comments item=comment}
                 <p>
-                    <strong>Commentaire #{$comment->id_admiring_comment}</strong> : {$comment->comment}
+                    <strong>{l s='Comment' mod='admiring'} #{$comment->id_admiring_comment}</strong> : {$comment->comment}
                 </p>
                 <p>
-                    <strong>Note</strong> {$comment->grade}/5
+                    <strong>{l s='Grade' mod='admiring'}</strong> {$comment->grade}/5
                 </p>
             {/foreach}
 
             <form method="post">
                 <div class="form-group">
-                    <label for="admiring_grade">Note :</label>
+                    <label for="admiring_grade">{l s='Grade' mod='admiring'} :</label>
                     <select name="admiring_grade" id="admiring_grade" class="form-control">
-                        <option value="" disabled selected>Choisissez votre note</option>
+                        <option value="" disabled selected>{l s='Choose a grade' mod='admiring'}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -24,14 +24,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="admiring_comment">Commentaire :</label>
+                    <label for="admiring_comment">{l s='Comment' mod='admiring'} :</label>
                     <textarea name="admiring_comment" id="admiring_comment" cols="30" rows="10"
                               class="form-control"></textarea>
                 </div>
-                <button type="submit" name="submit_admiring_comment" class="btn btn-dark btn-flat">Envoyer</button>
+                <button type="submit" name="submit_admiring_comment" class="btn btn-dark btn-flat">{l s='Send' mod='admiring'}</button>
             </form>
         </div>
 
-        {*<a href="#">Voir tous les commentaires</a>*}
     </div>
 {/if}

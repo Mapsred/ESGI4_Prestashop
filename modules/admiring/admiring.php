@@ -24,8 +24,8 @@ class Admiring extends Module
         $this->tab = 'advertising_marketing';
         $this->version = '0.1.0';
         $this->author = 'François MATHIEU';
-        $this->displayName = 'Admiring';
-        $this->description = 'Avec ce module, vos clients pourront faire quelque chose !';
+        $this->displayName = $this->l('Admiring');
+        $this->description = $this->l('With this module, your clients will be able to do something !');
         $this->bootstrap = true;
         parent::__construct();
         $this->moduleDir = _PS_MODULE_DIR_ . $this->name;
@@ -202,7 +202,7 @@ class Admiring extends Module
      */
     public function hookDisplayReassurance()
     {
-        $this->smarty->assign('module_name', $this->l('Commentaires sur le produit'));
+        $this->smarty->assign('module_name', $this->l('Comments on the product'));
         $this->smarty->assign('enable_grades', Configuration::get('ADMIRING_GRADES'));
         $this->smarty->assign('enable_comments', Configuration::get('ADMIRING_COMMENTS'));
 
