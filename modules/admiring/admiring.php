@@ -6,6 +6,8 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+include_once _PS_MODULE_DIR_.'admiring/classes/AdmiringComment.php';
+
 /**
  * Class Admiring
  *
@@ -40,6 +42,20 @@ class Admiring extends Module
 
         Configuration::updateValue('ADMIRING_COMMENTS', 1);
         Configuration::updateValue('ADMIRING_GRADES', 1);
+
+        return true;
+    }
+
+    public function uninstall()
+    {
+        if (!parent::uninstall()) {
+            return false;
+        }
+
+
+        $this->dropTable();
+        Configuration::deleteByName('ADMIRING_COMMENTS');
+        Configuration::deleteByName('ADMIRING_GRADES');
 
         return true;
     }

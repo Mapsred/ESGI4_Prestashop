@@ -19,9 +19,8 @@
                 </div>
                 <div class="form-group">
                     <label for="admiring_comment">Commentaire :</label>
-                    <textarea name="admiring_comment" id="admiring_comment" cols="30" rows="10" class="form-control">
-
-                </textarea>
+                    <textarea name="admiring_comment" id="admiring_comment" cols="30" rows="10"
+                              class="form-control"></textarea>
                 </div>
                 <button type="submit" name="submit_admiring_comment" class="btn btn-dark btn-flat">Envoyer</button>
             </form>
