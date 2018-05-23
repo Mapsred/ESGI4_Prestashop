@@ -143,7 +143,7 @@ class Blockreassurance extends Module implements WidgetInterface
         if (!empty($params['lang']) && $params['lang'] instanceOf Language) {
             include_once _PS_MODULE_DIR_ . $this->name . '/lang/ReassuranceLang.php';
 
-            Language::updateMultilangFromClass(_DB_PREFIX_ . 'reassurance_lang', 'AdmiringLang', $params['lang']);
+            Language::updateMultilangFromClass(_DB_PREFIX_ . 'reassurance_lang', 'ReassuranceLang', $params['lang']);
         }
     }
 
