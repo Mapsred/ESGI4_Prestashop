@@ -15,3 +15,6 @@ customized-install:
 
 composer-install:
 	$(COMPOSER) install
+
+dump-import:
+	mysql -u prestashop -pprestashop prestashop < bin/prestashop.sql --host=127.0.0.1 --port=8155

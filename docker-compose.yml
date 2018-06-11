@@ -51,3 +51,8 @@ services:
       volumes:
         - .:/application
       tty: true
+networks:
+  default:
+    ipam:
+     config:
+       - subnet: 10.100.50.0/24
