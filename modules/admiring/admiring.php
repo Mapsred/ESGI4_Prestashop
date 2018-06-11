@@ -237,6 +237,10 @@ class Admiring extends Module
 
         $this->smarty->assign('comments', $this->assignFromValues());
 
+        $id_product = Tools::getValue('id_product');
+        $this->context->smarty->assign('params', ['id_product' => $id_product]);
+
+
         return $this->fetch($this->moduleDir . "/views/templates/hook/displayReassurance.tpl");
     }
 

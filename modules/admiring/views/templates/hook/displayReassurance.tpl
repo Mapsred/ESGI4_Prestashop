@@ -1,10 +1,15 @@
+<a href="{url entity='module' name='admiring' controller='monControleur' params = $params}">
+    {l s='See all comments' mod='admiring'}
+</a>
+
 {if $enable_grades or $enable_comments}
     <div id="block-comments" data-data-scroll="true">
         <h3 class="page-product-heading">{$module_name}</h3>
         <div class="tabs">
             {foreach from=$comments item=comment}
                 <p>
-                    <strong>{l s='Comment' mod='admiring'} #{$comment->id_admiring_comment}</strong> : {$comment->comment}
+                    <strong>{l s='Comment' mod='admiring'} #{$comment->id_admiring_comment}</strong>
+                    : {$comment->comment}
                 </p>
                 <p>
                     <strong>{l s='Grade' mod='admiring'}</strong> {$comment->grade}/5
@@ -28,7 +33,8 @@
                     <textarea name="admiring_comment" id="admiring_comment" cols="30" rows="10"
                               class="form-control"></textarea>
                 </div>
-                <button type="submit" name="submit_admiring_comment" class="btn btn-dark btn-flat">{l s='Send' mod='admiring'}</button>
+                <button type="submit" name="submit_admiring_comment"
+                        class="btn btn-dark btn-flat">{l s='Send' mod='admiring'}</button>
             </form>
         </div>
 

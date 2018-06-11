@@ -51,7 +51,7 @@ class AdmiringComment extends ObjectModel
      */
     public static function findAll()
     {
-        $queryBuilder= self::getQueryBuilder();
+        $queryBuilder = self::getQueryBuilder();
         $queryBuilder->orderBy('date_add DESC');
 
         return array_map(function (array $data) {
@@ -65,12 +65,34 @@ class AdmiringComment extends ObjectModel
      */
     public static function findByLimit($limit = 3)
     {
-        $queryBuilder= self::getQueryBuilder();
+        $queryBuilder = self::getQueryBuilder();
         $queryBuilder->limit($limit);
 
         return array_map(function (array $data) {
             return self::init($data);
         }, Db::getInstance()->executeS($queryBuilder));
+    }
+
+    public static function findByProductIdLimit($productId, $offset, $limit)
+    {
+        $queryBuilder = self::getQueryBuilder();
+        $queryBuilder->where('id_product = ' . (int)$productId);
+        $queryBuilder->orderBy('date_add DESC');
+        $queryBuilder->limit($limit, $offset);
+
+        return array_map(function (array $data) {
+            return self::init($data);
+        }, Db::getInstance()->executeS($queryBuilder));
+    }
+
+    public static function countByProductId($productId)
+    {
+        $sql = new DbQuery();
+        $sql->select('COUNT(*)');
+        $sql->from(self::TABLE);
+        $sql->where('id_product = ' . (int)$productId);
+
+        return Db::getInstance()->getValue($sql);
     }
 
     /**
