@@ -40,7 +40,7 @@ class Admiring extends Module
     {
         parent::install();
         $this->createTable();
-        $this->registerHook('displayReassurance');
+        $this->registerHook('productComments');
         $this->registerHook('actionFrontControllerSetMedia');
 
         Configuration::updateValue('ADMIRING_COMMENTS', 1);
@@ -226,7 +226,7 @@ class Admiring extends Module
     /**
      * @return string
      */
-    public function hookDisplayReassurance()
+    public function hookProductComments()
     {
         $this->smarty->assign('module_name', $this->l('Comments on the product'));
         $this->smarty->assign('enable_grades', Configuration::get('ADMIRING_GRADES'));

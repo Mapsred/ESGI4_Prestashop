@@ -155,6 +155,7 @@
                     </div>
 
                     {block name='hook_display_reassurance'}
+                        {hook h='productComments'}
                         {hook h='displayReassurance'}
                     {/block}
 
