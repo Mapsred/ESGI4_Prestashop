@@ -18,15 +18,11 @@ class Search extends SearchCore
                 $id_produits[] = $prod['id_product'];
             }
 
-            $requete = "SELECT `id_product`, AVG(`grade`) as grade_avg, COUNT(`id_admiring_comment`) as nb_comments
-        FROM `" . _DB_PREFIX_ . "admiring_comment` WHERE `id_product` IN (" . implode(',', $id_produits) . ") GROUP BY `id_product`";
-            $productsWithNotation = Db::getInstance()->executeS($requete);
-
+            $productsWithNotation = AdmiringComment::search($id_produits);
 
             foreach ($productsWithNotation as $prodNote) {
-                $id_prod = $prodNote['id_product'];
                 foreach ($findProducts as $kp => $prod) {
-                    if ($prod['id_product'] == $id_prod) {
+                    if ($prod['id_product'] == $prodNote['id_product']) {
                         $findProducts[$kp]['admiring']['grade_avg'] = $prodNote['grade_avg'];
                         $findProducts[$kp]['admiring']['nb_comments'] = $prodNote['nb_comments'];
                     }

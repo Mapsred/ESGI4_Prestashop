@@ -98,12 +98,12 @@ class AdmiringComment extends ObjectModel
     public static function search($idProducts)
     {
         $sql = new DbQuery();
-        $sql->select('id_product, AVG(grade) as grave_avg, COUNT(id_admiring_comment) as nb_comments');
+        $sql->select('id_product, AVG(grade) as grade_avg, COUNT(id_admiring_comment) as nb_comments');
         $sql->from(self::TABLE);
         $sql->where('id_product IN (' . implode(',', $idProducts) . ')');
         $sql->groupBy('id_product');
 
-        return Db::getInstance()->getValue($sql);
+        return Db::getInstance()->executeS($sql);
     }
 
     /**
