@@ -1,6 +1,5 @@
 <?php
 /** @noinspection PhpUndefinedClassInspection */
-/** @noinspection PhpUndefinedFieldInspection */
 
 if (!defined('_PS_VERSION_')) {
     exit;
