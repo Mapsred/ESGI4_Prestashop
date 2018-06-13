@@ -23,7 +23,7 @@ class Search extends SearchCore
             foreach ($productsWithNotation as $prodNote) {
                 foreach ($findProducts as $kp => $prod) {
                     if ($prod['id_product'] == $prodNote['id_product']) {
-                        $findProducts[$kp]['admiring']['grade_avg'] = $prodNote['grade_avg'];
+                        $findProducts[$kp]['admiring']['grade_avg'] = number_format($prodNote['grade_avg'], 2);
                         $findProducts[$kp]['admiring']['nb_comments'] = $prodNote['nb_comments'];
                     }
                 }
