@@ -1,7 +1,13 @@
 <?php
 
+/**
+ * Class AdmiringComment
+ */
 class AdmiringComment extends ObjectModel
 {
+    /**
+     *
+     */
     const TABLE = "admiring_comment";
 
     /** @var integer $id_admiring_comment */
@@ -27,10 +33,10 @@ class AdmiringComment extends ObjectModel
         'primary' => 'id_admiring_comment',
         'multilang' => false,
         'fields' => [
-            'id_product' => ['type' => self::TYPE_INT],
-            'grade' => ['type' => self::TYPE_INT],
-            'comment' => ['type' => self::TYPE_STRING],
-            'date_add' => ['type' => self::TYPE_DATE, 'validate' => 'isDateFormat'],
+            'id_product' => ['type' => self::TYPE_INT, 'validate' => 'isUnsignedId', 'required' => true],
+            'grade' => ['type' => self::TYPE_INT, 'validate' => 'isUnsignedInt'],
+            'comment' => ['type' => self::TYPE_STRING, 'validate' => 'isCleanHtml'],
+            'date_add' => ['type' => self::TYPE_DATE, 'validate' => 'isDate', 'copy_post' => false],
         ]
     ];
 
@@ -73,6 +79,13 @@ class AdmiringComment extends ObjectModel
         }, Db::getInstance()->executeS($queryBuilder));
     }
 
+    /**
+     * @param $productId
+     * @param $offset
+     * @param $limit
+     * @return array
+     * @throws PrestaShopDatabaseException
+     */
     public static function findByProductIdLimit($productId, $offset, $limit)
     {
         $queryBuilder = self::getQueryBuilder();
@@ -85,6 +98,10 @@ class AdmiringComment extends ObjectModel
         }, Db::getInstance()->executeS($queryBuilder));
     }
 
+    /**
+     * @param $productId
+     * @return false|null|string
+     */
     public static function countByProductId($productId)
     {
         $sql = new DbQuery();
@@ -95,6 +112,11 @@ class AdmiringComment extends ObjectModel
         return Db::getInstance()->getValue($sql);
     }
 
+    /**
+     * @param $idProducts
+     * @return array|false|mysqli_result|null|PDOStatement|resource
+     * @throws PrestaShopDatabaseException
+     */
     public static function search($idProducts)
     {
         $sql = new DbQuery();
