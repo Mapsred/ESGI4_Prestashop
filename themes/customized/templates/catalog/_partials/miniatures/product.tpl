@@ -65,6 +65,16 @@
           {/if}
         {/block}
 
+          {block name='admiring_reviews'}
+              {if $product.admiring}
+                  <ul class="admiring-reviews text-center">
+                      <li>Note moyenne : {$product.admiring.grade_avg}</li>
+                      <li>Nombre de commentaires : {$product.admiring.nb_comments}</li>
+                  </ul>
+              {/if}
+
+          {/block}
+
         {block name='product_reviews'}
           {hook h='displayProductListReviews' product=$product}
         {/block}
