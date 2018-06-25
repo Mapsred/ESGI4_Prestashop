@@ -2,8 +2,6 @@
 
 ### Installation
 
-Copy the ``app/config/database.php.dist`` to ``app/config/database.php``
-
 Import MySQL dump :
 ````bash
 docker exec -it prestashop-mariadb bash
