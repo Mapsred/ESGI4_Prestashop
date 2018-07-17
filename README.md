@@ -1,12 +1,17 @@
 # Prestashop
 
+### Commands
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ docker-compose up -d
+$ make customized-install
+$ make composer-install
+$ make esgi-install
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ### Installation
 
-Import MySQL dump :
-````bash
-docker exec -it prestashop-mariadb bash
-mysql -u root -proot prestashop < bin/prestashop
-````
 
 Create the following file to configure your database : 
 ```php
@@ -17,24 +22,23 @@ return [
     'database_host' => 'mariadb',
     'database_port' => '',
     'database_name' => 'prestashop',
-    'database_user' => 'prestashop',
-    'database_password' => 'prestashop',
+    'database_user' => 'root',
+    'database_password' => 'root',
 ];
 ```
 
-To use on ``localhost`` or any other host, replace the 
-docker-compose webserver port by ``80:80`` and run the following 
-SQL Query : 
-````sql
-UPDATE `ps_shop_url` SET `domain` = 'localhost', `domain_ssl` = 'localhost' WHERE `id_shop_url` = 1;
+Import MySQL dump :
+````bash
+$ make mysql-dump-import
 ````
 
-### Commands
+Export MySQL dump :
+````bash
+$ make mysql-dump-export
+````
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ docker-compose up -d
-$ docker-compose exec nodejs npm --prefix themes/customized/_dev install
-$ docker-compose exec php-fpm composer install
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To use on ``localhost`` or any other host, replace the 
+docker-compose webserver port by ``80:80`` and run the following 
 
 ### Admin 
 ``/dashboard``
