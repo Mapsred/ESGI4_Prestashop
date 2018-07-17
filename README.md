@@ -1,6 +1,6 @@
 # Prestashop
 
-### Commands
+### Installation
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 $ docker-compose up -d
@@ -8,9 +8,6 @@ $ make customized-install
 $ make composer-install
 $ make esgi-install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-### Installation
 
 
 Create the following file to configure your database : 
