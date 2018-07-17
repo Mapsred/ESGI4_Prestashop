@@ -1,35 +1,52 @@
 # Prestashop
 
-### Commands
+### Installation
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$ docker-compose up -d
-$ docker-compose exec nodejs npm --prefix themes/customized/_dev install
-$ docker-compose exec php-fpm composer install
+
+#### make
+
+- Go to [ezwinports](https://sourceforge.net/projects/ezwinports/files/).
+- Download `make-4.1-2-without-guile-w32-bin.zip` (get the version without guile).
+- Extract zip.
+- Copy the contents to your `Git\mingw64\` merging the folders, but do NOT overwrite/replace any existing files. 
+
+make is a GNU command so the only way you can get it on Windows is installing a Windows version like the one provided by [GNUWin32](https://sourceforge.net/projects/gnuwin32/files/make/3.81/make-3.81.exe/download?use_mirror=datapacket&download=).
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ docker-compose up -d
+$ make customized-install
+$ make composer-install
+$ make esgi-install
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Installation
+Create the following file to configure your database : 
+```php
+// app/config/database.php
+<?php
 
-Copy the ``app/config/database.php.dist`` to ``app/config/database.php``
+return [
+    'database_host' => 'mariadb',
+    'database_port' => '',
+    'database_name' => 'prestashop',
+    'database_user' => 'root',
+    'database_password' => 'root',
+];
+```
 
 Import MySQL dump :
 ````bash
-docker exec -it prestashop-mariadb bash
-mysql -u root -proot prestashop < bin/prestashop
+$ make mysql-dump-import
+````
+
+Export MySQL dump :
+````bash
+$ make mysql-dump-export
 ````
 
 To use on ``localhost`` or any other host, replace the 
 docker-compose webserver port by ``80:80`` and run the following 
-SQL Query : 
-````sql
-UPDATE `ps_shop_url` SET `domain` = 'localhost', `domain_ssl` = 'localhost' WHERE `id_shop_url` = 1;
-````
-
-To update the page title : 
-````sql
-UPDATE `ps_configuration` SET `value` = 'MyShomeName' WHERE `name` = 'PS_SHOP_NAME';
-UPDATE `ps_configuration` SET `value` = 'MyShopEmail' WHERE `name` = 'PS_SHOP_EMAIL';
-````
 
 ### Admin 
 ``/dashboard``

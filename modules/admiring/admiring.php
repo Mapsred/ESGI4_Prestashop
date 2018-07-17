@@ -259,4 +259,29 @@ class Admiring extends Module
             ['priority' => 200, 'attribute' => 'async']
         );
     }
+
+    public static function getProductsByCategory($id_category){
+        $context = Context::getContext();
+        $category = new Category( (int) $id_category, $context->language->id);
+        $products = $category->getProducts($context->language->id,0,9);
+        $link = new Link();
+        foreach ($products as $key => $product){
+            $image = new Image(Product::getCover($product['id_product'])['id_image']);
+
+            $product['cover'] = [
+                'bySize' => [
+                    'home_default' => [
+                        'url' => 'http://'. $link->getImageLink($product['link_rewrite'], $image->id_image, 'home_default'),
+                    ]
+                ],
+                'large' => [
+                    'url' => 'http://'.$link->getImageLink($product['link_rewrite'], $image->id_image, 'large'),
+                ]
+            ];
+            $product['url'] =$product['link'];
+            $product['has_discount'] = ((float)$product['quantity_discount'] > 0) ? true : false;
+            $products[$key] = $product;
+        }
+        return $products;
+    }
 }
