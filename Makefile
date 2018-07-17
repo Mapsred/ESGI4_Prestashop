@@ -1,19 +1,30 @@
 DOCKER-COMPOSE = docker-compose exec
 
 NODEJS = $(DOCKER-COMPOSE) nodejs
-NPM = $(NODEJS) npm --prefix themes/customized/_dev
+NPM = $(NODEJS) npm --prefix themes
+CUSTOMIZED_THEME = $(NPM)/customized/_dev
+ESGI_THEME = $(NPM)/esgi/_dev
 
 PHP = $(DOCKER-COMPOSE) php-fpm
 COMPOSER = $(PHP) composer
 
 customized-watch:
-	 $(NPM) run watch
+	 $(CUSTOMIZED_THEME) run watch
 
 customized-build:
-	 $(NPM) run build
+	 $(CUSTOMIZED_THEME) run build
 
 customized-install:
-	 $(NPM) install
+	 $(CUSTOMIZED_THEME) install
+
+esgi-watch:
+	 $(ESGI_THEME) run watch
+
+esgi-build:
+	 $(ESGI_THEME) run build
+
+esgi-install:
+	 $(ESGI_THEME) install
 
 composer-install:
 	$(COMPOSER) install
